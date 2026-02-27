@@ -10,12 +10,12 @@
     - [x] [Práctica con GitHub (evaluación contínua)](Parcial1/1-Introducción-NoSQL/4-practica)
   - [ ] BD Documentales (MongoDB)
     
-    - [ ] Teoría básica
-    - [ ] Práctica Básica: herramientas
-    - [ ] Práctica Intermedia: CRUD
-    - [ ] Práctica Intermedia: Operadores
-    - [ ] Práctica Avanzada
-    - [ ] Práctica Avanzada
+    - [x] [Teoría básica](Parcial1/2-MONGODB/1-teoria)
+    - [x] [Práctica Básica: Diseño de esquemas](Parcial1/2-MONGODB/2-diseno-esquemas)
+    - [x] [Práctica Intermedia: CRUD](Parcial1/2-MONGODB/3-CRUD-operadores)
+    - [x] [Práctica Intermedia: Índices y Rendimiento](Parcial1/2-MONGODB/4-indices-rendimiento)
+    - [x] [Práctica Avanzada: Aggregation Framework](Parcial1/2-MONGODB/5-aggregation-framework)
+    - [x] [Práctica Avanzada: Modelado Avanzado y Patrones de Diseño](Parcial1/2-MONGODB/6-modelado-avanzado)
     - [ ] Teoría: Optimización y escalabilidad
     - [ ] Taller: Casos Reales (evaluación contínua)
   - [ ] Examen del Primer Parcial
