@@ -249,11 +249,39 @@ session.startTransaction()
 try {
   dbSession.cursos.insertOne({ nombre: "Nuevo Curso" })
   dbSession.estudiantes.updateOne(
-    { nombre: "Ana" },
+    { nombre: "Estudiante 1" },
     { $set: { activo: true } }
   )
   session.commitTransaction()
 } catch (e) {
+  print("ERROR:")
+  printjson(e)
+  session.abortTransaction()
+}
+
+session.endSession()
+```
+
+```JS
+db.cursos.createIndex({nombre:1},{unique:true})
+
+use academia
+
+session = db.getMongo().startSession()
+dbSession = session.getDatabase("academia")
+
+session.startTransaction()
+
+try {
+  dbSession.cursos.insertOne({ nombre: "Nuevo Curso" })
+  dbSession.estudiantes.updateOne(
+    { nombre: "Estudiante 1" },
+    { $set: { activo: false} }
+  )
+  session.commitTransaction()
+} catch (e) {
+  print("ERROR:")
+  printjson(e)
   session.abortTransaction()
 }
 
