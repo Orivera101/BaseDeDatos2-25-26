@@ -239,53 +239,85 @@ db.pedidos.find({ total: { $gt: 100 } })
 4. Observar diferencia.
 
 ```JS
-use academia
-
 session = db.getMongo().startSession()
-dbSession = session.getDatabase("academia")
+
+dbTx = session.getDatabase("academia")
 
 session.startTransaction()
 
 try {
-  dbSession.cursos.insertOne({ nombre: "Nuevo Curso" })
-  dbSession.estudiantes.updateOne(
+
+  dbTx.estudiantes.updateOne(
     { nombre: "Estudiante 1" },
-    { $set: { activo: true } }
+    { $set: { activo: true} }
   )
+
+  dbTx.cursos.insertOne({
+    nombre: "Curso 1000"
+  })
+
+  print("COMMIT EJECUTADO")
+
   session.commitTransaction()
-} catch (e) {
-  print("ERROR:")
-  printjson(e)
+
+
+
+} catch(e){
+
+  print("ROLLBACK EJECUTADO")
+
   session.abortTransaction()
+
 }
 
 session.endSession()
 ```
 
 ```JS
-db.cursos.createIndex({nombre:1},{unique:true})
-
-use academia
-
 session = db.getMongo().startSession()
-dbSession = session.getDatabase("academia")
+
+dbTx = session.getDatabase("academia")
 
 session.startTransaction()
 
 try {
-  dbSession.cursos.insertOne({ nombre: "Nuevo Curso" })
-  dbSession.estudiantes.updateOne(
+
+  dbTx.estudiantes.updateOne(
     { nombre: "Estudiante 1" },
     { $set: { activo: false} }
   )
+
+  dbTx.cursos.insertOne({
+    nombre: "Curso 1000"
+  })
+
+  print("COMMIT EJECUTADO")
+
   session.commitTransaction()
-} catch (e) {
-  print("ERROR:")
-  printjson(e)
+
+
+
+} catch(e){
+
+  print("ROLLBACK EJECUTADO")
+
   session.abortTransaction()
+
 }
 
 session.endSession()
+```
+
+```JS
+db.estudiantes.find({nombre:  "Estudiante 1" })
+```
+
+```JS
+db.cursos.find({nombre:  "Curso 1000" })
+```
+
+```JS
+db.cursos.createIndex({nombre:  1 }, {unique: true})
 ```
 
 ## Ejercicio 5 — Monitoreo
